@@ -39,7 +39,7 @@
 
   <dt>Delete venue</dt>
   <dd>
-    <a href="/delete_venue/<% @the_venue.id %>">
+    <a href="/delete_venue/<%= @the_venue.id %>">
       Delete this venue
     </a>
   </dd>
@@ -57,7 +57,10 @@
   <% @the_venue.comments.each do |comment| %>
   <tr>
     <td>
-      <%= comment.commenter.username %>
+      <% id_ = comment.author_id %>
+      <%= User.where({ :id => id_ }).at(0).username %>
+      <!-- For some reason accessor wasn't working properly so I
+          used the "long way" -->
     </td>
 
     <td>
